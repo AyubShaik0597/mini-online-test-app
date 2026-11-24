@@ -1,77 +1,136 @@
-# Mini Online Test App (MERN)
+# Quizly — Online Test Application
 
-A small full-stack online test app built with MongoDB, Express, React, and Node.js.
+Quizly is a full-stack online examination platform built using the MERN stack. It allows students to register, take timed multiple-choice tests, view results, and track their performance. Administrators can manage questions and monitor student attempts.
 
-## Features
-- Student signup/login with email and password (bcrypt + JWT)
-- 10 multiple-choice questions loaded from MongoDB
-- 10-minute countdown with auto-submit
-- Results with score, selected answers, and correct answers
-- Attempt history with score and date
-- Optional admin question creation endpoint/page (set `VITE_ADMIN_MODE=true` to show it)
+## 🌐 Live Demo
 
-## Project structure
-```text
-mini-online-test-app/
-  backend/
-  frontend/
+- **Frontend:** https://mini-online-test-app.vercel.app
+
+## 🚀 Features
+
+### Student
+- Sign up and log in with email and password.
+- Take a 10-question multiple-choice aptitude test.
+- Complete the test within a 10-minute time limit.
+- Automatic submission when the timer expires.
+- View scores and correct/incorrect answers.
+- View previous test attempts.
+
+### Administrator
+- Secure admin login.
+- View registered students.
+- Monitor exam attempts, scores, and percentages.
+- Review students' submitted answers.
+- Add and manage test questions.
+- Restrict administrative operations to authorized users.
+
+## 🛠️ Technologies Used
+
+**Frontend**
+- React.js
+- Vite
+- CSS
+
+**Backend**
+- Node.js
+- Express.js
+- JWT authentication
+
+**Database**
+- MongoDB Atlas
+
+**Deployment**
+- Vercel — Frontend
+- Render — Backend
+
+## 🔑 Demo Login Credentials
+
+### Student Account
+- Email: 
+- Password: Set your password during registration.
+
+### Administrator Account
+- Admin email: ayub123@gmail.com
+- Admin password: Ayub@1903
+
+**Security note:** Create a separate demo administrator account if public access is needed. Use a unique password and avoid exposing production credentials.
+
+## ⚙️ Run Locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/YOUR-USERNAME/mini-online-test-app.git
+cd mini-online-test-app
 ```
 
-## Requirements
-- Node.js 18+
-- MongoDB local instance or MongoDB Atlas connection string
+### 2. Start the backend
 
-## 1. Configure the backend
 ```bash
 cd backend
-copy .env.example .env
 npm install
 ```
-Edit `.env` and set `MONGO_URI`, `JWT_SECRET`, and (optionally) `ADMIN_EMAIL`.
 
-Seed 10 sample questions:
-```bash
-npm run seed
+Create a `.env` file in the backend directory and configure your environment variables:
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secure_random_secret
+CLIENT_ORIGIN=http://localhost:5173
+ADMIN_EMAIL=your_admin_email
 ```
-Start API:
+
+Start the backend:
+
 ```bash
 npm run dev
 ```
-API runs on `http://localhost:5000`.
 
-## 2. Configure the frontend
-Open another terminal:
+### 3. Start the frontend
+
+Open a second terminal:
+
 ```bash
 cd frontend
-copy .env.example .env
 npm install
 npm run dev
 ```
-Open the Vite URL shown in your terminal (normally `http://localhost:5173`).
 
-## Default workflow
-1. Sign up with an email and password.
-2. Log in.
-3. Start the test and answer the 10 questions.
-4. Submit or wait for the timer to auto-submit.
-5. Review the result and open History to see previous attempts.
+Open `http://localhost:5173` in your browser.
 
-## Admin bonus
-The backend allows question creation only for the configured `ADMIN_EMAIL`.
-Set `ADMIN_EMAIL=your-email@example.com` in `backend/.env`, then sign up using that email.
-Set `VITE_ADMIN_MODE=true` in `frontend/.env` to display the Admin tab.
-The admin endpoint is `POST /api/questions` and requires a JWT for the admin account.
+## 📁 Project Structure
 
-## API routes
-- `POST /api/auth/signup`
-- `POST /api/auth/login`
-- `GET /api/questions` (returns 10 random questions, without answers)
-- `POST /api/questions` (admin only)
-- `POST /api/attempts` (submit attempt; score is calculated by backend)
-- `GET /api/attempts/me` (current user's attempt history)
+```text
+mini-online-test-app/
+├── backend/
+│   ├── src/
+│   ├── package.json
+│   └── .env
+├── frontend/
+│   ├── src/
+│   └── package.json
+├── .gitignore
+└── README.md
+```
 
-## Deployment notes
-- Deploy `backend` as a Node web service (Render, for example) and set `MONGO_URI`, `JWT_SECRET`, `ADMIN_EMAIL`, and `CLIENT_ORIGIN`.
-- Deploy `frontend` as a static site (Vercel/Netlify) and set `VITE_API_URL` to your deployed backend URL, ending without a trailing slash.
-- Add your frontend domain to `CLIENT_ORIGIN` on the backend.
+*The exact contents of the source directories may vary.*
+
+## 🔒 Security
+
+- Keep environment variables and database credentials private.
+- Never commit `.env` files to GitHub.
+- Use secure JWT configuration.
+- Validate administrator roles on the backend for every protected admin operation.
+- Never allow users to grant themselves administrator privileges through signup.
+
+## 👨‍💻 Author
+
+**Shaik Ayub**
+
+Full-Stack Developer | Java | Spring Boot | React | Node.js | MongoDB
+
+## 📄 License
+
+This project is intended for learning, demonstration, and portfolio purposes.o `CLIENT_ORIGIN` on the backend.
 - This starter project is ready for local development; you still need to create your own GitHub repository and deploy it to obtain live links.
